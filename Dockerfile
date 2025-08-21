@@ -26,12 +26,12 @@ ENV PYTHONPATH=/app
 ENV DATABASE_URL=sqlite:///./data/loads.db
 
 # Expose ports
-EXPOSE 8000 8050
+EXPOSE 8080
 
 # Create startup script
 RUN echo '#!/bin/bash\n\
 python init_data.py\n\
-uvicorn main:app --host 0.0.0.0 --port 8000 &\n\
+uvicorn main:app --host 0.0.0.0 --port $PORT &\n\
 python dashboard.py &\n\
 wait' > start.sh && chmod +x start.sh
 
